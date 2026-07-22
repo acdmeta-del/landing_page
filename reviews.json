@@ -1,7 +1,62 @@
 {
-  "updatedAt": null,
-  "placeUri": "",
+  "updatedAt": "2026-07-22",
+  "placeUri": "https://maps.google.com/?cid=7291147063888512685",
   "rating": null,
   "total": null,
-  "reviews": []
+  "reviews": [
+    {
+      "author": "Saulo Silva",
+      "authorUri": "",
+      "photo": "",
+      "rating": 5,
+      "text": "Sou frequentador assíduo dessa academia e não poderia deixar de expressar o quanto estou satisfeito! Ambiente super acolhedor, equipamentos de última geração e uma equipe de profissionais muito atenciosos e qualificados. A energia é sempre incrível, e cada treino é uma nova motivação para alcançar meus objetivos. Sem dúvida, a melhor escolha para quem busca resultados e bem-estar. Recomendo de olhos fechados.",
+      "when": "há 1 ano",
+      "time": ""
+    },
+    {
+      "author": "Byanca Cosme",
+      "authorUri": "",
+      "photo": "",
+      "rating": 5,
+      "text": "Há dois anos treino lá e nunca me arrependi de ter ido pra lá. Está cada vez melhor! Ótimos profissionais e maquinários novos!",
+      "when": "há 5 meses",
+      "time": ""
+    },
+    {
+      "author": "Daniel Cadete",
+      "authorUri": "",
+      "photo": "",
+      "rating": 5,
+      "text": "Unidade Planalto muito bem localizada e arejada, bom ambiente para um treino completo!",
+      "when": "há 1 ano",
+      "time": ""
+    },
+    {
+      "author": "Mikaele Lima",
+      "authorUri": "",
+      "photo": "",
+      "rating": 5,
+      "text": "Toda uma estrutura ótima! Profissionais atenciosos. A melhor sem dúvidas, recomendo demais!",
+      "when": "há 1 ano",
+      "time": ""
+    },
+    {
+      "author": "Israel Feijó de França",
+      "authorUri": "",
+      "photo": "",
+      "rating": 5,
+      "text": "Excelente academia, excelente atendimento. Equipamentos novos.",
+      "when": "há 1 ano",
+      "time": ""
+    },
+    {
+      "author": "Fernanda Melo",
+      "authorUri": "",
+      "photo": "",
+      "rating": 5,
+      "text": "Ambiente agradável, tem uma variedade de máquinas, e profissionais comprometidos.",
+      "when": "há 1 ano",
+      "time": ""
+    }
+  ]
 }

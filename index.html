@@ -744,6 +744,15 @@
             img.referrerPolicy = 'no-referrer';
             img.className = 'w-11 h-11 rounded-full object-cover';
             cap.appendChild(img);
+          } else {
+            // Sem foto do Google: avatar com as iniciais (mantém o card completo)
+            const avatar = document.createElement('div');
+            avatar.className = 'w-11 h-11 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center font-bold text-sm shrink-0';
+            avatar.setAttribute('aria-hidden', 'true');
+            const initials = (r.author || 'A')
+              .split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+            avatar.textContent = initials;
+            cap.appendChild(avatar);
           }
 
           const info = document.createElement('div');
