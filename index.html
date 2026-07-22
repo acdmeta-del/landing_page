@@ -399,17 +399,17 @@
             <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Quem treina na AcadMeta, recomenda</h2>
             <p class="mt-4 text-brand-gray-mid text-lg">Histórias reais de quem começou do seu jeito e evoluiu com a gente.</p>
           </div>
-          <div class="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-sm">
-            <span class="text-4xl font-extrabold text-brand-orange">4,9</span>
+          <a id="reviews-summary" href="#" target="_blank" rel="noopener" class="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-sm hover:shadow-md transition">
+            <span id="reviews-rating" class="text-4xl font-extrabold text-brand-orange">4,9</span>
             <div>
               <div class="text-brand-orange text-lg leading-none">★★★★★</div>
-              <p class="text-xs text-brand-gray-mid mt-1">Média no Google • 2.000+ avaliações</p>
+              <p id="reviews-count" class="text-xs text-brand-gray-mid mt-1">Média no Google</p>
             </div>
-          </div>
+          </a>
         </div>
 
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Depoimento -->
+        <div id="reviews-grid" class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Depoimento (fallback estático — substituído pelos dados reais do reviews.json quando disponível) -->
           <figure class="reveal rounded-2xl bg-white p-6 shadow-sm">
             <div class="text-brand-orange">★★★★★</div>
             <blockquote class="mt-3 text-brand-black">"Voltei a treinar depois de anos parada. A equipe me acolheu desde o primeiro dia e hoje não largo mais."</blockquote>
@@ -695,6 +695,74 @@
       window.open('https://wa.me/5500900000000?text=' + encodeURIComponent(msg), '_blank');
       return false;
     }
+
+    // Avaliações reais do Google — carregadas de reviews.json (gerado pelo GitHub Action).
+    // Se o arquivo não existir, estiver vazio ou falhar, mantém os cards estáticos (fallback).
+    (async function loadGoogleReviews() {
+      try {
+        const res = await fetch('reviews.json', { cache: 'no-cache' });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!Array.isArray(data.reviews) || data.reviews.length === 0) return;
+
+        // Atualiza o resumo (nota + total + link para o Google)
+        if (data.rating != null) {
+          document.getElementById('reviews-rating').textContent =
+            data.rating.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+        }
+        if (data.total != null) {
+          document.getElementById('reviews-count').textContent =
+            'Média no Google • ' + data.total.toLocaleString('pt-BR') + ' avaliações';
+        }
+        const summary = document.getElementById('reviews-summary');
+        if (data.placeUri) summary.href = data.placeUri; else summary.removeAttribute('href');
+
+        // Renderiza os cards reais (no máximo 6) via DOM seguro (textContent)
+        const grid = document.getElementById('reviews-grid');
+        grid.innerHTML = '';
+        data.reviews.slice(0, 6).forEach((r) => {
+          const fig = document.createElement('figure');
+          fig.className = 'reveal is-visible rounded-2xl bg-white p-6 shadow-sm';
+
+          const stars = document.createElement('div');
+          stars.className = 'text-brand-orange';
+          stars.setAttribute('aria-label', (r.rating || 5) + ' de 5 estrelas');
+          stars.textContent = '★'.repeat(Math.round(r.rating || 5)).padEnd(5, '☆');
+
+          const quote = document.createElement('blockquote');
+          quote.className = 'mt-3 text-brand-black';
+          quote.textContent = '"' + r.text + '"';
+
+          const cap = document.createElement('figcaption');
+          cap.className = 'mt-4 flex items-center gap-3';
+
+          if (r.photo) {
+            const img = document.createElement('img');
+            img.src = r.photo;
+            img.alt = 'Foto de ' + (r.author || 'aluno');
+            img.loading = 'lazy';
+            img.referrerPolicy = 'no-referrer';
+            img.className = 'w-11 h-11 rounded-full object-cover';
+            cap.appendChild(img);
+          }
+
+          const info = document.createElement('div');
+          const name = document.createElement('p');
+          name.className = 'font-semibold text-sm';
+          name.textContent = r.author || 'Aluno(a) AcadMeta';
+          const when = document.createElement('p');
+          when.className = 'text-xs text-brand-gray-mid';
+          when.textContent = (r.when ? r.when + ' • ' : '') + 'no Google';
+          info.append(name, when);
+          cap.appendChild(info);
+
+          fig.append(stars, quote, cap);
+          grid.appendChild(fig);
+        });
+      } catch (_) {
+        /* mantém o fallback estático */
+      }
+    })();
   </script>
 
   <!--
