@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AcadMeta — Mais que treino. Saúde, acompanhamento e resultado.</title>
+
+  <!-- SEO / Tráfego local -->
+  <meta name="description" content="AcadMeta é a academia que cuida de você: musculação com acompanhamento de verdade, aulas coletivas e avaliação física. Agende uma aula experimental grátis nas unidades Planalto e Centro." />
+  <meta name="keywords" content="academia, musculação, aula experimental grátis, academia Planalto, academia Centro, avaliação física, aulas coletivas" />
+  <meta name="author" content="AcadMeta" />
+  <link rel="canonical" href="https://www.acadmeta.com.br/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AcadMeta — Uma academia preparada para cuidar de você" />
+  <meta property="og:description" content="Musculação com acompanhamento, aulas coletivas e avaliação física. Agende sua aula experimental grátis." />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Favicon (símbolo oficial deve substituir este placeholder) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111111'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='%23FF6A00' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+
+  <!-- Tipografia: Inter (README §4) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind (Play CDN para protótipo — ver nota de produção no rodapé do código) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#FF6A00',      // Laranja — CTA, destaques (README §2)
+              'orange-dark': '#E85D00',
+              black: '#111111',       // Preto — títulos, seções de impacto
+              gray: '#F4F5F7',        // Cinza-claro — cards e fundos alternativos
+              'gray-mid': '#6B7280',  // Cinza — textos de apoio
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Animação discreta de entrada (README §13) */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-brand-black bg-white antialiased">
+
+  <!-- ============================================================= -->
+  <!-- HEADER — fixo, compacto (README §11)                          -->
+  <!-- ============================================================= -->
+  <header id="topo" class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logomarca (placeholder — substituir pelo arquivo oficial, README §3) -->
+      <a href="#topo" class="flex items-center gap-2 font-extrabold text-xl tracking-tight">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-brand-black text-brand-orange">A</span>
+        <span>Acad<span class="text-brand-orange">Meta</span></span>
+      </a>
+
+      <!-- Navegação desktop -->
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-gray-mid">
+        <li><a href="#planos" class="hover:text-brand-black transition">Planos</a></li>
+        <li><a href="#unidades" class="hover:text-brand-black transition">Unidades</a></li>
+        <li><a href="#depoimentos" class="hover:text-brand-black transition">Alunos</a></li>
+        <li><a href="#equipe" class="hover:text-brand-black transition">Equipe</a></li>
+        <li><a href="#faq" class="hover:text-brand-black transition">Dúvidas</a></li>
+      </ul>
+
+      <!-- CTA persistente no topo (README §7) -->
+      <a href="#agendar" class="hidden md:inline-flex items-center rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5">
+        Aula experimental grátis
+      </a>
+
+      <!-- Botão menu mobile -->
+      <button id="menuBtn" aria-label="Abrir menu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-brand-black hover:bg-brand-gray">
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+
+    <!-- Menu mobile -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-100 bg-white">
+      <ul class="px-4 py-3 space-y-1 text-base font-medium">
+        <li><a href="#planos" class="block py-2.5 px-2 rounded-lg hover:bg-brand-gray">Planos</a></li>
+        <li><a href="#unidades" class="block py-2.5 px-2 rounded-lg hover:bg-brand-gray">Unidades</a></li>
+        <li><a href="#depoimentos" class="block py-2.5 px-2 rounded-lg hover:bg-brand-gray">Alunos</a></li>
+        <li><a href="#equipe" class="block py-2.5 px-2 rounded-lg hover:bg-brand-gray">Equipe</a></li>
+        <li><a href="#faq" class="block py-2.5 px-2 rounded-lg hover:bg-brand-gray">Dúvidas</a></li>
+      </ul>
+      <div class="px-4 pb-4">
+        <a href="#agendar" class="block text-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white">Aula experimental grátis</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- ============================================================= -->
+    <!-- HERO (README §11)                                            -->
+    <!-- ============================================================= -->
+    <section class="relative overflow-hidden">
+      <!-- Imagem real da academia (placeholder Unsplash — substituir por foto da unidade) -->
+      <div class="absolute inset-0 -z-10">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&q=70"
+             alt="Ambiente amplo e iluminado da academia AcadMeta" class="w-full h-full object-cover" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70 md:to-white/40"></div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28">
+        <div class="max-w-2xl">
+          <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange-dark">
+            <span class="w-2 h-2 rounded-full bg-brand-orange"></span> Aqui nós cuidamos de você
+          </span>
+
+          <!-- Título focado no benefício principal do aluno -->
+          <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight">
+            Seu treino com <span class="text-brand-orange">acompanhamento de verdade</span>
+          </h1>
+
+          <!-- Subtítulo: o que é, para quem é, qual o diferencial -->
+          <p class="mt-5 text-lg text-brand-gray-mid leading-relaxed">
+            A AcadMeta é um centro de saúde e performance para quem quer começar ou
+            voltar a cuidar do corpo. Musculação, aulas coletivas e avaliação física
+            com uma equipe perto de você — no seu ritmo, do seu jeito.
+          </p>
+
+          <!-- CTA principal de baixo atrito -->
+          <div id="agendar" class="mt-8 rounded-2xl bg-white/90 backdrop-blur border border-gray-100 shadow-lg p-5 sm:p-6">
+            <p class="font-semibold text-brand-black">Agende uma aula experimental grátis</p>
+            <p class="text-sm text-brand-gray-mid mt-1">Sem compromisso. Leva menos de 1 minuto.</p>
+            <form class="mt-4 grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3" onsubmit="return handleLead(event)">
+              <label class="sr-only" for="lead-nome">Nome</label>
+              <input id="lead-nome" name="nome" type="text" required placeholder="Seu nome"
+                     class="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" />
+              <label class="sr-only" for="lead-fone">WhatsApp</label>
+              <input id="lead-fone" name="telefone" type="tel" required placeholder="WhatsApp (com DDD)"
+                     class="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" />
+              <button type="submit"
+                      class="rounded-xl bg-brand-orange px-6 py-3 font-semibold text-white shadow-sm hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5 whitespace-nowrap">
+                Quero começar
+              </button>
+            </form>
+            <p class="mt-3 text-xs text-brand-gray-mid">🔒 Seus dados são usados apenas para agendar sua visita.</p>
+          </div>
+
+          <!-- Micro prova social imediata -->
+          <div class="mt-6 flex items-center gap-3 text-sm text-brand-gray-mid">
+            <div class="flex text-brand-orange">★★★★★</div>
+            <span><strong class="text-brand-black">4,9/5</strong> de mais de 2.000 alunos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- INDICADORES DE CONFIANÇA — contadores (README §11, §13)      -->
+    <!-- ============================================================= -->
+    <section class="bg-brand-black text-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <dl class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="reveal">
+            <dt class="text-4xl font-extrabold text-brand-orange"><span class="count" data-target="2000">0</span>+</dt>
+            <dd class="mt-1 text-sm text-gray-300">Alunos ativos</dd>
+          </div>
+          <div class="reveal">
+            <dt class="text-4xl font-extrabold text-brand-orange"><span class="count" data-target="2">0</span></dt>
+            <dd class="mt-1 text-sm text-gray-300">Unidades na cidade</dd>
+          </div>
+          <div class="reveal">
+            <dt class="text-4xl font-extrabold text-brand-orange"><span class="count" data-target="15">0</span>+</dt>
+            <dd class="mt-1 text-sm text-gray-300">Modalidades e aulas</dd>
+          </div>
+          <div class="reveal">
+            <dt class="text-4xl font-extrabold text-brand-orange"><span class="count" data-target="98">0</span>%</dt>
+            <dd class="mt-1 text-sm text-gray-300">Alunos recomendam</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- BENEFÍCIOS — cards (README §8, §11)                          -->
+    <!-- ============================================================= -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Mais que equipamentos. Uma estrutura para cuidar de você.</h2>
+        <p class="mt-4 text-brand-gray-mid text-lg">Tudo o que você precisa para treinar com segurança, constância e resultado.</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card benefício -->
+        <div class="reveal rounded-2xl bg-brand-gray p-6 hover:shadow-md transition">
+          <div class="w-11 h-11 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.5 6.5h11v11h-11z M3 9v6M21 9v6M8 12h8"/></svg>
+          </div>
+          <h3 class="font-bold text-lg">Musculação com acompanhamento</h3>
+          <p class="mt-2 text-sm text-brand-gray-mid">Professores disponíveis na sala para corrigir, orientar e evoluir seu treino com você.</p>
+        </div>
+
+        <div class="reveal rounded-2xl bg-brand-gray p-6 hover:shadow-md transition">
+          <div class="w-11 h-11 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20V10M18 20V4M6 20v-4"/></svg>
+          </div>
+          <h3 class="font-bold text-lg">Avaliação física completa</h3>
+          <p class="mt-2 text-sm text-brand-gray-mid">Entenda seu ponto de partida e acompanhe sua evolução com dados reais.</p>
+        </div>
+
+        <div class="reveal rounded-2xl bg-brand-gray p-6 hover:shadow-md transition">
+          <div class="w-11 h-11 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 100-8 4 4 0 000 8z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg">Aulas coletivas</h3>
+          <p class="mt-2 text-sm text-brand-gray-mid">Energia em grupo: funcional, dança, ritmos e mais. Treinar fica mais leve.</p>
+        </div>
+
+        <div class="reveal rounded-2xl bg-brand-gray p-6 hover:shadow-md transition">
+          <div class="w-11 h-11 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg">Treino pelo aplicativo</h3>
+          <p class="mt-2 text-sm text-brand-gray-mid">Sua ficha, seus horários e sua evolução sempre na palma da mão.</p>
+        </div>
+
+        <div class="reveal rounded-2xl bg-brand-gray p-6 hover:shadow-md transition">
+          <div class="w-11 h-11 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2M12 19v2M5 12H3M21 12h-2M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg">Ambiente climatizado</h3>
+          <p class="mt-2 text-sm text-brand-gray-mid">Conforto do início ao fim do treino, mesmo nos dias mais quentes.</p>
+        </div>
+
+        <div class="reveal rounded-2xl bg-brand-gray p-6 hover:shadow-md transition">
+          <div class="w-11 h-11 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg">Horários flexíveis</h3>
+          <p class="mt-2 text-sm text-brand-gray-mid">Aberto cedo e até tarde, para treinar antes ou depois da sua rotina.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- UNIDADES — comparação (README §9, §11)                       -->
+    <!-- ============================================================= -->
+    <section id="unidades" class="bg-brand-gray">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Escolha a unidade que combina com a sua rotina</h2>
+          <p class="mt-4 text-brand-gray-mid text-lg">Duas propostas, a mesma marca e o mesmo cuidado com você.</p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Plus – Planalto -->
+          <article class="reveal rounded-2xl bg-white overflow-hidden shadow-sm border border-gray-100">
+            <div class="relative h-56">
+              <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=70" alt="Estrutura completa da unidade AcadMeta Plus Planalto" class="w-full h-full object-cover" loading="lazy" />
+              <span class="absolute top-4 left-4 rounded-full bg-brand-orange px-3 py-1 text-xs font-semibold text-white">Estrutura completa</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold">AcadMeta Plus — Planalto</h3>
+              <p class="mt-2 text-sm text-brand-gray-mid">Experiência ampliada, com mais serviços e conforto para o seu dia a dia.</p>
+              <ul class="mt-4 space-y-2 text-sm">
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Aulas coletivas variadas</li>
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Ambiente totalmente climatizado</li>
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Maior variedade de equipamentos</li>
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Grupo de corrida e atividades extras</li>
+              </ul>
+              <a href="#agendar" class="mt-6 inline-flex w-full justify-center rounded-full border-2 border-brand-orange px-5 py-2.5 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Conhecer a Planalto</a>
+            </div>
+          </article>
+
+          <!-- Essencial – Centro -->
+          <article class="reveal rounded-2xl bg-white overflow-hidden shadow-sm border border-gray-100">
+            <div class="relative h-56">
+              <img src="https://images.unsplash.com/photo-1637666505879-77b6b4c67b62?auto=format&fit=crop&w=1200&q=70" alt="Sala de musculação prática da unidade AcadMeta Essencial Centro" class="w-full h-full object-cover" loading="lazy" />
+              <span class="absolute top-4 left-4 rounded-full bg-brand-black px-3 py-1 text-xs font-semibold text-white">Melhor custo-benefício</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold">AcadMeta Essencial — Centro</h3>
+              <p class="mt-2 text-sm text-brand-gray-mid">Prática, acessível e pertinho de você, com o acompanhamento que faz a diferença.</p>
+              <ul class="mt-4 space-y-2 text-sm">
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Musculação com acompanhamento</li>
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Localização central e prática</li>
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Excelente custo-benefício</li>
+                <li class="flex gap-2"><span class="text-brand-orange">✓</span> Treino pelo aplicativo</li>
+              </ul>
+              <a href="#agendar" class="mt-6 inline-flex w-full justify-center rounded-full border-2 border-brand-orange px-5 py-2.5 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Conhecer a Centro</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PLANOS — Mensal, Trimestral, VIP (README §11)                -->
+    <!-- ============================================================= -->
+    <section id="planos" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Planos claros, sem letras miúdas</h2>
+        <p class="mt-4 text-brand-gray-mid text-lg">Escolha o que faz sentido para o seu momento. Você pode mudar quando quiser.</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <!-- Mensal -->
+        <div class="reveal rounded-2xl border border-gray-200 p-8 flex flex-col">
+          <h3 class="font-bold text-lg">Mensal</h3>
+          <p class="text-sm text-brand-gray-mid mt-1">Flexibilidade total, sem fidelidade.</p>
+          <p class="mt-6"><span class="text-4xl font-extrabold">R$ 129</span><span class="text-brand-gray-mid">/mês</span></p>
+          <ul class="mt-6 space-y-3 text-sm flex-1">
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Acesso à musculação</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Treino pelo aplicativo</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Avaliação física inicial</li>
+            <li class="flex gap-2 text-gray-400"><span>–</span> Aulas coletivas</li>
+          </ul>
+          <a href="#agendar" class="mt-8 inline-flex justify-center rounded-full border-2 border-brand-orange px-5 py-3 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Começar no mensal</a>
+        </div>
+
+        <!-- Trimestral — destaque -->
+        <div class="reveal relative rounded-2xl bg-brand-black text-white p-8 flex flex-col shadow-xl md:-mt-4 md:mb-0">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-4 py-1 text-xs font-semibold">Mais escolhido</span>
+          <h3 class="font-bold text-lg">Trimestral</h3>
+          <p class="text-sm text-gray-300 mt-1">O equilíbrio entre economia e constância.</p>
+          <p class="mt-6"><span class="text-4xl font-extrabold text-brand-orange">R$ 99</span><span class="text-gray-300">/mês</span></p>
+          <p class="text-xs text-gray-400 mt-1">Cobrado trimestralmente • economize 23%</p>
+          <ul class="mt-6 space-y-3 text-sm flex-1">
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Tudo do plano Mensal</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Aulas coletivas incluídas</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Reavaliação a cada 90 dias</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Acesso às duas unidades</li>
+          </ul>
+          <a href="#agendar" class="mt-8 inline-flex justify-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white hover:bg-brand-orange-dark transition">Escolher trimestral</a>
+        </div>
+
+        <!-- VIP -->
+        <div class="reveal rounded-2xl border border-gray-200 p-8 flex flex-col">
+          <h3 class="font-bold text-lg">VIP</h3>
+          <p class="text-sm text-brand-gray-mid mt-1">Acompanhamento próximo e experiência completa.</p>
+          <p class="mt-6"><span class="text-4xl font-extrabold">R$ 219</span><span class="text-brand-gray-mid">/mês</span></p>
+          <ul class="mt-6 space-y-3 text-sm flex-1">
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Tudo do plano Trimestral</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Treino personalizado</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Acompanhamento nutricional</li>
+            <li class="flex gap-2"><span class="text-brand-orange">✓</span> Acesso a grupo de corrida</li>
+          </ul>
+          <a href="#agendar" class="mt-8 inline-flex justify-center rounded-full border-2 border-brand-orange px-5 py-3 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Quero ser VIP</a>
+        </div>
+      </div>
+
+      <p class="mt-8 text-center text-sm text-brand-gray-mid">Sem taxa de adesão surpresa. Cancelamento simples pelo aplicativo ou na recepção.</p>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PROVA SOCIAL — depoimentos + transformações (README §11)     -->
+    <!-- ============================================================= -->
+    <section id="depoimentos" class="bg-brand-gray">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div class="max-w-2xl">
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Quem treina na AcadMeta, recomenda</h2>
+            <p class="mt-4 text-brand-gray-mid text-lg">Histórias reais de quem começou do seu jeito e evoluiu com a gente.</p>
+          </div>
+          <div class="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-sm">
+            <span class="text-4xl font-extrabold text-brand-orange">4,9</span>
+            <div>
+              <div class="text-brand-orange text-lg leading-none">★★★★★</div>
+              <p class="text-xs text-brand-gray-mid mt-1">Média no Google • 2.000+ avaliações</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Depoimento -->
+          <figure class="reveal rounded-2xl bg-white p-6 shadow-sm">
+            <div class="text-brand-orange">★★★★★</div>
+            <blockquote class="mt-3 text-brand-black">"Voltei a treinar depois de anos parada. A equipe me acolheu desde o primeiro dia e hoje não largo mais."</blockquote>
+            <figcaption class="mt-4 flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=70" alt="Foto da aluna Camila R." class="w-11 h-11 rounded-full object-cover" loading="lazy" />
+              <div>
+                <p class="font-semibold text-sm">Camila R.</p>
+                <p class="text-xs text-brand-gray-mid">Aluna há 1 ano • unidade Centro</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal rounded-2xl bg-white p-6 shadow-sm">
+            <div class="text-brand-orange">★★★★★</div>
+            <blockquote class="mt-3 text-brand-black">"O acompanhamento faz toda a diferença. Perdi 12kg em 8 meses treinando com orientação de verdade."</blockquote>
+            <figcaption class="mt-4 flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=70" alt="Foto do aluno Rafael M." class="w-11 h-11 rounded-full object-cover" loading="lazy" />
+              <div>
+                <p class="font-semibold text-sm">Rafael M.</p>
+                <p class="text-xs text-brand-gray-mid">Aluno há 8 meses • unidade Planalto</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal rounded-2xl bg-white p-6 shadow-sm">
+            <div class="text-brand-orange">★★★★★</div>
+            <blockquote class="mt-3 text-brand-black">"Ambiente limpo, climatizado e professores presentes. Consegui criar constância pela primeira vez."</blockquote>
+            <figcaption class="mt-4 flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=100&q=70" alt="Foto do aluno Diego S." class="w-11 h-11 rounded-full object-cover" loading="lazy" />
+              <div>
+                <p class="font-semibold text-sm">Diego S.</p>
+                <p class="text-xs text-brand-gray-mid">Aluno há 6 meses • unidade Planalto</p>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- EQUIPE / ESTÚDIO — familiaridade e confiança (README §6)     -->
+    <!-- ============================================================= -->
+    <section id="equipe" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Uma equipe preparada para cuidar de você</h2>
+        <p class="mt-4 text-brand-gray-mid text-lg">Profissionais que orientam, acompanham e torcem pela sua evolução.</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <figure class="reveal group rounded-2xl overflow-hidden bg-brand-gray">
+          <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=600&q=70" alt="Treinadora Marina, professora de musculação" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+          <figcaption class="p-4">
+            <p class="font-semibold">Marina Alves</p>
+            <p class="text-sm text-brand-gray-mid">Musculação & avaliação física</p>
+          </figcaption>
+        </figure>
+        <figure class="reveal group rounded-2xl overflow-hidden bg-brand-gray">
+          <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=600&q=70" alt="Treinador Bruno, professor de aulas coletivas" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+          <figcaption class="p-4">
+            <p class="font-semibold">Bruno Costa</p>
+            <p class="text-sm text-brand-gray-mid">Aulas coletivas & funcional</p>
+          </figcaption>
+        </figure>
+        <figure class="reveal group rounded-2xl overflow-hidden bg-brand-gray">
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=70" alt="Treinador Paulo, especialista em performance" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+          <figcaption class="p-4">
+            <p class="font-semibold">Paulo Henrique</p>
+            <p class="text-sm text-brand-gray-mid">Performance & grupo de corrida</p>
+          </figcaption>
+        </figure>
+        <figure class="reveal group rounded-2xl overflow-hidden bg-brand-gray">
+          <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=600&q=70" alt="Treinadora Juliana, orientação para iniciantes" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+          <figcaption class="p-4">
+            <p class="font-semibold">Juliana Reis</p>
+            <p class="text-sm text-brand-gray-mid">Acolhimento de iniciantes</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- LOCALIZAÇÃO — mapa + endereço (SEO local)                    -->
+    <!-- ============================================================= -->
+    <section id="localizacao" class="bg-brand-black text-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Perto de você, nas duas unidades</h2>
+            <p class="mt-4 text-gray-300 text-lg">Venha treinar na unidade mais prática para a sua rotina.</p>
+
+            <div class="mt-8 space-y-6">
+              <div class="rounded-2xl bg-white/5 p-5">
+                <p class="font-semibold text-brand-orange">AcadMeta Plus — Planalto</p>
+                <p class="mt-1 text-sm text-gray-300">Av. das Nações, 1200 — Planalto</p>
+                <p class="text-sm text-gray-300">Seg a Sex: 5h30 às 23h • Sáb: 8h às 18h • Dom: 8h às 13h</p>
+              </div>
+              <div class="rounded-2xl bg-white/5 p-5">
+                <p class="font-semibold text-brand-orange">AcadMeta Essencial — Centro</p>
+                <p class="mt-1 text-sm text-gray-300">Rua Principal, 340 — Centro</p>
+                <p class="text-sm text-gray-300">Seg a Sex: 6h às 22h • Sáb: 8h às 14h</p>
+              </div>
+            </div>
+
+            <a href="#agendar" class="mt-8 inline-flex items-center rounded-full bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark transition">Agendar uma visita</a>
+          </div>
+
+          <!-- Mapa (placeholder — substituir src pelo embed real do Google Maps) -->
+          <div class="rounded-2xl overflow-hidden shadow-lg h-80 lg:h-[26rem] bg-white/10">
+            <iframe
+              title="Mapa da localização da AcadMeta"
+              class="w-full h-full border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-47.95%2C-15.80%2C-47.85%2C-15.74&layer=mapnik">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- FAQ — objeções comuns (README §11)                           -->
+    <!-- ============================================================= -->
+    <section id="faq" class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Perguntas frequentes</h2>
+        <p class="mt-4 text-brand-gray-mid text-lg">Tudo o que você precisa saber antes de começar.</p>
+      </div>
+
+      <div class="mt-10 divide-y divide-gray-200 border-y border-gray-200">
+        <details class="faq group py-2">
+          <summary class="flex cursor-pointer items-center justify-between py-4 font-semibold list-none">
+            A academia tem estacionamento?
+            <span class="ml-4 text-brand-orange transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-4 text-brand-gray-mid text-sm">Sim. A unidade Planalto conta com estacionamento próprio gratuito para alunos. Na unidade Centro, há estacionamentos conveniados na mesma quadra com valor reduzido.</p>
+        </details>
+
+        <details class="faq group py-2">
+          <summary class="flex cursor-pointer items-center justify-between py-4 font-semibold list-none">
+            Quais são os horários de funcionamento?
+            <span class="ml-4 text-brand-orange transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-4 text-brand-gray-mid text-sm">Planalto: seg a sex das 5h30 às 23h, sáb das 8h às 18h e dom das 8h às 13h. Centro: seg a sex das 6h às 22h e sáb das 8h às 14h.</p>
+        </details>
+
+        <details class="faq group py-2">
+          <summary class="flex cursor-pointer items-center justify-between py-4 font-semibold list-none">
+            Posso cancelar quando quiser?
+            <span class="ml-4 text-brand-orange transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-4 text-brand-gray-mid text-sm">Sim. O plano mensal não tem fidelidade e pode ser cancelado a qualquer momento pelo aplicativo ou na recepção, sem burocracia e sem multa.</p>
+        </details>
+
+        <details class="faq group py-2">
+          <summary class="flex cursor-pointer items-center justify-between py-4 font-semibold list-none">
+            Nunca treinei antes. A AcadMeta é para mim?
+            <span class="ml-4 text-brand-orange transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-4 text-brand-gray-mid text-sm">Com certeza. Boa parte dos nossos alunos está começando ou voltando a treinar. Você faz uma avaliação inicial e recebe acompanhamento para evoluir no seu ritmo.</p>
+        </details>
+
+        <details class="faq group py-2">
+          <summary class="flex cursor-pointer items-center justify-between py-4 font-semibold list-none">
+            A aula experimental é realmente grátis?
+            <span class="ml-4 text-brand-orange transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-4 text-brand-gray-mid text-sm">Sim, é 100% gratuita e sem compromisso. Você conhece a estrutura, conversa com um professor e experimenta um treino antes de decidir.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- CTA FINAL                                                     -->
+    <!-- ============================================================= -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 md:pb-24">
+      <div class="rounded-3xl bg-brand-orange px-6 py-12 md:py-16 text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Comece do seu jeito. Nós ajudamos você a evoluir.</h2>
+        <p class="mt-4 text-white/90 text-lg max-w-2xl mx-auto">Agende sua aula experimental grátis e sinta na prática o que é treinar com acompanhamento de verdade.</p>
+        <a href="#agendar" class="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 font-bold text-brand-black hover:bg-brand-black hover:text-white transition-transform hover:-translate-y-0.5">Agendar aula experimental grátis</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- RODAPÉ institucional (README §11)                             -->
+  <!-- ============================================================= -->
+  <footer class="bg-brand-black text-gray-400">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-2 font-extrabold text-xl text-white">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/10 text-brand-orange">A</span>
+            Acad<span class="text-brand-orange">Meta</span>
+          </div>
+          <p class="mt-4 text-sm">Mais que treino. Saúde, acompanhamento e resultado.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-white">Navegação</p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a href="#planos" class="hover:text-brand-orange">Planos</a></li>
+            <li><a href="#unidades" class="hover:text-brand-orange">Unidades</a></li>
+            <li><a href="#depoimentos" class="hover:text-brand-orange">Alunos</a></li>
+            <li><a href="#faq" class="hover:text-brand-orange">Dúvidas</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white">Unidades</p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>Plus — Planalto<br />Av. das Nações, 1200</li>
+            <li>Essencial — Centro<br />Rua Principal, 340</li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white">Fale com a AcadMeta</p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>WhatsApp: (00) 90000-0000</li>
+            <li>contato@acadmeta.com.br</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <p>© 2026 AcadMeta. Todos os direitos reservados.</p>
+        <p>Aqui nós cuidamos de você.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================= -->
+  <!-- BOTÃO FLUTUANTE DE WHATSAPP (README §11)                      -->
+  <!-- ============================================================= -->
+  <a href="https://wa.me/5500900000000?text=Ol%C3%A1!%20Quero%20agendar%20uma%20aula%20experimental%20grátis%20na%20AcadMeta"
+     target="_blank" rel="noopener"
+     aria-label="Falar no WhatsApp"
+     class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-4 py-3 shadow-lg hover:scale-105 transition">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+    <span class="hidden sm:inline text-sm font-semibold">Fale conosco</span>
+  </a>
+
+  <!-- ============================================================= -->
+  <!-- JAVASCRIPT — interações leves (README §13)                    -->
+  <!-- ============================================================= -->
+  <script>
+    // Menu mobile
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden') === false;
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    // Fecha um FAQ ao abrir outro (acordeão)
+    const faqs = document.querySelectorAll('details.faq');
+    faqs.forEach(d => d.addEventListener('toggle', () => {
+      if (d.open) faqs.forEach(o => { if (o !== d) o.open = false; });
+    }));
+
+    // Scroll reveal + contadores
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        entry.target.querySelectorAll?.('.count').forEach(runCounter);
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    function runCounter(el) {
+      const target = +el.dataset.target;
+      const duration = 1200;
+      const start = performance.now();
+      (function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        el.textContent = Math.floor(p * target).toLocaleString('pt-BR');
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString('pt-BR');
+      })(start);
+    }
+
+    // Formulário de lead (placeholder — integrar com CRM/WhatsApp/backend)
+    function handleLead(e) {
+      e.preventDefault();
+      const nome = e.target.nome.value.trim();
+      const tel = e.target.telefone.value.trim();
+      const msg = `Olá! Meu nome é ${nome} e quero agendar uma aula experimental grátis. Meu WhatsApp: ${tel}`;
+      window.open('https://wa.me/5500900000000?text=' + encodeURIComponent(msg), '_blank');
+      return false;
+    }
+  </script>
+
+  <!--
+    NOTA DE PRODUÇÃO
+    ----------------
+    Este arquivo usa o Tailwind Play CDN para acelerar o protótipo. Para produção
+    (performance, README §12), migrar para um build compilado do Tailwind:
+      1. npx tailwindcss init  → gerar tailwind.config.js com as cores da marca
+      2. Compilar o CSS e remover o <script src="cdn.tailwindcss.com">
+      3. Substituir imagens Unsplash por fotos reais das unidades (WebP, comprimidas)
+      4. Trocar o placeholder da logomarca pelo arquivo oficial (README §3)
+      5. Inserir o embed real do Google Maps de cada unidade (SEO local)
+      6. Conectar o formulário de lead ao CRM / WhatsApp Business real
+  -->
+</body>
+</html>
