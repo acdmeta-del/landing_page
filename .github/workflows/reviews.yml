@@ -1,9 +1,13 @@
 name: Atualizar avaliações do Google
 
+# DORMENTE: o agendamento diário foi desativado porque optamos por manter as
+# avaliações manualmente no reviews.json (sem depender da conta paga do Google Cloud).
+# Se um dia você ativar a Places API (New) com faturamento, basta descomentar o
+# bloco "schedule" abaixo e configurar os secrets/variables (ver README).
 on:
-  schedule:
-    - cron: '0 9 * * *'   # todos os dias às 09:00 UTC (~06:00 em Lajedo)
-  workflow_dispatch:       # permite rodar manualmente pela aba Actions
+  # schedule:
+  #   - cron: '0 9 * * *'   # todos os dias às 09:00 UTC (~06:00 em Lajedo)
+  workflow_dispatch:       # por ora, só roda manualmente pela aba Actions
 
 permissions:
   contents: write          # necessário para commitar o reviews.json atualizado
