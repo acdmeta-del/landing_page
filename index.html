@@ -83,7 +83,7 @@
       </ul>
 
       <!-- CTA persistente no topo (README §7) -->
-      <a href="#agendar" class="hidden md:inline-flex items-center rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5">
+      <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Quero agendar uma aula experimental grátis na AcadMeta." class="hidden md:inline-flex items-center rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5">
         Aula experimental grátis
       </a>
 
@@ -103,7 +103,7 @@
         <li><a href="#faq" class="block py-2.5 px-2 rounded-lg hover:bg-brand-gray">Dúvidas</a></li>
       </ul>
       <div class="px-4 pb-4">
-        <a href="#agendar" class="block text-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white">Aula experimental grátis</a>
+        <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Quero agendar uma aula experimental grátis na AcadMeta." class="block text-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white">Aula experimental grátis</a>
       </div>
     </div>
   </header>
@@ -143,19 +143,22 @@
           <div id="agendar" class="mt-8 rounded-2xl bg-white/90 backdrop-blur border border-gray-100 shadow-lg p-5 sm:p-6">
             <p class="font-semibold text-brand-black">Agende uma aula experimental grátis</p>
             <p class="text-sm text-brand-gray-mid mt-1">Sem compromisso. Leva menos de 1 minuto.</p>
-            <form class="mt-4 grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3" onsubmit="return handleLead(event)">
-              <label class="sr-only" for="lead-nome">Nome</label>
-              <input id="lead-nome" name="nome" type="text" required placeholder="Seu nome"
-                     class="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" />
+            <form class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" onsubmit="return handleLead(event)">
+              <label class="sr-only" for="lead-nome">Nome completo</label>
+              <input id="lead-nome" name="nome" type="text" required autocomplete="name" placeholder="Nome completo"
+                     class="sm:col-span-2 rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" />
               <label class="sr-only" for="lead-fone">WhatsApp</label>
-              <input id="lead-fone" name="telefone" type="tel" required placeholder="WhatsApp (com DDD)"
+              <input id="lead-fone" name="telefone" type="tel" required autocomplete="tel" placeholder="WhatsApp (com DDD)"
+                     class="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" />
+              <label class="sr-only" for="lead-email">E-mail</label>
+              <input id="lead-email" name="email" type="email" required autocomplete="email" placeholder="Seu melhor e-mail"
                      class="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" />
               <button type="submit"
-                      class="rounded-xl bg-brand-orange px-6 py-3 font-semibold text-white shadow-sm hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5 whitespace-nowrap">
-                Quero começar
+                      class="sm:col-span-2 rounded-xl bg-brand-orange px-6 py-3 font-semibold text-white shadow-sm hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5">
+                Enviar no WhatsApp
               </button>
             </form>
-            <p class="mt-3 text-xs text-brand-gray-mid">🔒 Seus dados são usados apenas para agendar sua visita.</p>
+            <p class="mt-3 text-xs text-brand-gray-mid">🔒 Seus dados são usados apenas para agendar sua aula. Ao enviar, abrimos o WhatsApp com sua mensagem pronta.</p>
           </div>
 
           <!-- Micro prova social imediata -->
@@ -307,7 +310,7 @@
               <li class="flex gap-2"><span class="text-brand-orange">✓</span> Treino pelo aplicativo</li>
               <li class="flex gap-2"><span class="text-brand-orange">✓</span> Professores presentes no salão</li>
             </ul>
-            <a href="#agendar" class="mt-8 inline-flex w-full justify-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5">Agendar minha visita</a>
+            <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Quero agendar uma visita para conhecer a AcadMeta Planalto." class="mt-8 inline-flex w-full justify-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white hover:bg-brand-orange-dark transition-transform hover:-translate-y-0.5">Agendar minha visita</a>
           </div>
         </div>
       </div>
@@ -335,7 +338,7 @@
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> Avaliação física inicial</li>
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> Ou <strong>R$ 79,90/mês</strong> até 4x por semana</li>
           </ul>
-          <a href="#agendar" class="mt-8 inline-flex justify-center rounded-full border-2 border-brand-orange px-5 py-3 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Começar no mensal</a>
+          <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Tenho interesse no plano Mensal da AcadMeta (R$ 89,90/mês, até 7x por semana). Pode me passar mais informações?" class="mt-8 inline-flex justify-center rounded-full border-2 border-brand-orange px-5 py-3 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Começar no mensal</a>
         </div>
 
         <!-- Trimestral -->
@@ -350,7 +353,7 @@
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> Acompanhamento contínuo</li>
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> Reavaliação no período</li>
           </ul>
-          <a href="#agendar" class="mt-8 inline-flex justify-center rounded-full border-2 border-brand-orange px-5 py-3 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Escolher trimestral</a>
+          <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Tenho interesse no plano Trimestral da AcadMeta (R$ 86,66/mês ou R$ 260 à vista). Pode me passar mais informações?" class="mt-8 inline-flex justify-center rounded-full border-2 border-brand-orange px-5 py-3 font-semibold text-brand-black hover:bg-brand-orange hover:text-white transition">Escolher trimestral</a>
         </div>
 
         <!-- Semestral — destaque -->
@@ -366,7 +369,7 @@
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> Reavaliações periódicas</li>
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> 6 meses de constância</li>
           </ul>
-          <a href="#agendar" class="mt-8 inline-flex justify-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white hover:bg-brand-orange-dark transition">Escolher semestral</a>
+          <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Tenho interesse no plano Semestral da AcadMeta (R$ 85,00/mês ou R$ 510 à vista). Pode me passar mais informações?" class="mt-8 inline-flex justify-center rounded-full bg-brand-orange px-5 py-3 font-semibold text-white hover:bg-brand-orange-dark transition">Escolher semestral</a>
         </div>
 
         <!-- Anual -->
@@ -382,7 +385,7 @@
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> Acompanhamento o ano todo</li>
             <li class="flex gap-2"><span class="text-brand-orange">✓</span> Ideal para quem quer constância</li>
           </ul>
-          <a href="#agendar" class="mt-8 inline-flex justify-center rounded-full bg-brand-black px-5 py-3 font-semibold text-white hover:bg-brand-orange transition">Escolher anual</a>
+          <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Tenho interesse no plano Anual da AcadMeta (R$ 80,00/mês ou R$ 960 à vista). Pode me passar mais informações?" class="mt-8 inline-flex justify-center rounded-full bg-brand-black px-5 py-3 font-semibold text-white hover:bg-brand-orange transition">Escolher anual</a>
         </div>
       </div>
 
@@ -508,7 +511,7 @@
               </div>
             </div>
 
-            <a href="#agendar" class="mt-8 inline-flex items-center rounded-full bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark transition">Agendar uma visita</a>
+            <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Quero agendar uma visita à AcadMeta Planalto." class="mt-8 inline-flex items-center rounded-full bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark transition">Agendar uma visita</a>
           </div>
 
           <!-- Mapa — embed real do Google Maps da unidade AcadMeta Planalto -->
@@ -585,7 +588,7 @@
       <div class="rounded-3xl bg-brand-orange px-6 py-12 md:py-16 text-center text-white">
         <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Comece do seu jeito. Nós ajudamos você a evoluir.</h2>
         <p class="mt-4 text-white/90 text-lg max-w-2xl mx-auto">Agende sua aula experimental grátis e sinta na prática o que é treinar com acompanhamento de verdade.</p>
-        <a href="#agendar" class="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 font-bold text-brand-black hover:bg-brand-black hover:text-white transition-transform hover:-translate-y-0.5">Agendar aula experimental grátis</a>
+        <a href="https://wa.me/558796403723" target="_blank" rel="noopener" data-wa="Olá! Quero agendar uma aula experimental grátis na AcadMeta." class="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 font-bold text-brand-black hover:bg-brand-black hover:text-white transition-transform hover:-translate-y-0.5">Agendar aula experimental grátis</a>
       </div>
     </section>
   </main>
@@ -687,12 +690,27 @@
     }
 
     // Formulário de lead (placeholder — integrar com CRM/WhatsApp/backend)
+    // Número único de WhatsApp da AcadMeta (usado por todos os CTAs e pelo formulário)
+    const WHATSAPP = '558796403723';
+    const waLink = (msg) => 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+
+    // Monta os links dos botões [data-wa] com a mensagem contextual de cada um
+    document.querySelectorAll('a[data-wa]').forEach((a) => {
+      a.href = waLink(a.dataset.wa);
+    });
+
+    // Formulário: monta a mensagem já com os dados preenchidos pela pessoa
     function handleLead(e) {
       e.preventDefault();
       const nome = e.target.nome.value.trim();
       const tel = e.target.telefone.value.trim();
-      const msg = `Olá! Meu nome é ${nome} e quero agendar uma aula experimental grátis. Meu WhatsApp: ${tel}`;
-      window.open('https://wa.me/558796403723?text=' + encodeURIComponent(msg), '_blank');
+      const email = e.target.email.value.trim();
+      const msg =
+        `Olá! Quero agendar uma aula experimental grátis na AcadMeta.\n\n` +
+        `*Nome:* ${nome}\n` +
+        `*WhatsApp:* ${tel}\n` +
+        `*E-mail:* ${email}`;
+      window.open(waLink(msg), '_blank');
       return false;
     }
 
