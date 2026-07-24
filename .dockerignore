@@ -1,0 +1,11 @@
+# Nada disso precisa ir para a imagem
+.git
+.github
+scripts
+node_modules
+*.md
+Dockerfile
+.dockerignore
+
+# Fotos antigas substituídas (não são usadas pelo site)
+assets/img/*_old.*
